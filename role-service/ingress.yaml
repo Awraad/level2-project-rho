@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-   name: test
+   name: role-service
    namespace: test
    annotations:
       ingress.kubernetes.io/ssl-redirect: "false"
