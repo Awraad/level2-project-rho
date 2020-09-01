@@ -13,4 +13,3 @@ spec:
         backend:
            serviceName: project-assessment-site
            servicePort: 80
-
