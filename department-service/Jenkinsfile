@@ -32,10 +32,10 @@ spec:
     }
   }
   environment {
-    CREDS = credentials('bryan_docker_creds')
-    DOCKER_NAMESPACE = 'bryandollery'
+    CREDS = credentials('rho-team-docker')
+    DOCKER_NAMESPACE = 'alhanouf1'
     SERVICE_NAME = 'department-service'
-    TOKEN=credentials('tester_token')
+    TOKEN=credentials('1be568b2-5054-466a-a48d-14dd2d1b9945')
   }
   stages {
       stage("Build") {
@@ -63,7 +63,8 @@ spec:
               container('kubectl') {
                   sh '''
                       cd $SERVICE_NAME
-                      kubectl --token=$TOKEN -n test apply -f deploy.yaml -f service.yaml
+                      kubectl --token=$TOKEN -n test apply -f deploy.yaml -f service.yaml -f ingress.yaml
+                   
                   '''
               }
           }
