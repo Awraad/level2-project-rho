@@ -50,7 +50,7 @@ spec:
           }
       }
       stage("Release") {
-          
+          when { changeset "**/department-service/**" }
           steps {
               container('dnd') {
                   sh '''
