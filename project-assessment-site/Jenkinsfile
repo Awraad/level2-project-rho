@@ -1,0 +1,76 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    service_name: project-assessment-site
+    service_type: REST
+spec:
+  containers:
+  - name: dnd
+    image: docker:latest
+    command: 
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+  - name: kubectl
+    image: bryandollery/terraform-packer-aws-alpine
+    command:
+    - cat
+    tty: true
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock  
+      type: Socket
+"""
+    }
+  }
+  environment {
+    CREDS = credentials('rho-team-docker')
+    DOCKER_NAMESPACE = 'alhanouf1'
+    SERVICE_NAME = 'project-assessment-site'
+    TOKEN=credentials('1be568b2-5054-466a-a48d-14dd2d1b9945')
+  }
+  stages {
+      stage("Build") {
+          steps {
+              container('dnd') {
+                  sh '''
+                      cd $SERVICE_NAME
+                      docker build --tag $DOCKER_NAMESPACE/$SERVICE_NAME .
+                  '''
+              }
+          }
+      }
+      stage("Release") {
+          steps {
+              container('dnd') {
+                  sh '''
+                      docker login -p $CREDS_PSW -u $CREDS_USR
+                      docker push $DOCKER_NAMESPACE/$SERVICE_NAME
+                  '''
+              }
+          }
+      }
+      stage("Deploy") {
+          steps {
+              container('kubectl') {
+                  sh '''
+                      cd $SERVICE_NAME
+                      kubectl --token=$TOKEN -n test apply -f deploy.yaml -f service.yaml
+                      ls
+                      kubectl --token=$TOKEN -n test apply -f ingress.yaml
+
+
+                  '''
+              }
+          }
+      }
+  }
+}
