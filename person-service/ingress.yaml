@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+   name: test
+   namespace: test
+   annotations:
+      ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+   rules:
+   - http:
+      paths:
+      - path: /person
+        backend:
+           serviceName: person-service
+           servicePort: 80
