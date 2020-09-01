@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: department-service
+  name: office-service
   namespace: test
   labels:
-    app: department-service
+    app: office-service
     type: api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: department-service
+      app: office-service
   template:
     metadata:
       labels:
-        app: department-service
+        app: office-service
     spec:
       containers:
-      - name: department-service
-        image: alhanouf1/department-service
+      - name: office-service
+        image: alhanouf1/office-service
         ports:
         - containerPort: 80

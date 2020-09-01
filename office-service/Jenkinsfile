@@ -1,3 +1,4 @@
+
 pipeline {
   agent {
     kubernetes {
@@ -6,7 +7,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    service_name: department-service
+    service_name: office-service
     service_type: REST
 spec:
   containers:
@@ -34,7 +35,7 @@ spec:
   environment {
     CREDS = credentials('rho-team-docker')
     DOCKER_NAMESPACE = 'alhanouf1'
-    SERVICE_NAME = 'department-service'
+    SERVICE_NAME = 'office-service'
     TOKEN=credentials('1be568b2-5054-466a-a48d-14dd2d1b9945')
   }
   stages {
@@ -61,10 +62,9 @@ spec:
       stage("Deploy") {
           steps {
               container('kubectl') {
-                  sh '''
+                   sh '''
                       cd $SERVICE_NAME
                       kubectl --token=$TOKEN -n test apply -f deploy.yaml -f service.yaml -f ingress.yaml
-                   
                   '''
               }
           }
