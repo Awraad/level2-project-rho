@@ -30,7 +30,7 @@ spec:
       path: /var/run/docker.sock  
       type: Socket
 """
-    }
+    } 
   }
   environment {
     CREDS = credentials('rho-team-docker')
