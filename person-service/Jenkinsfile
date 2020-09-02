@@ -35,10 +35,11 @@ spec:
     CREDS = credentials('rho-team-docker')
     DOCKER_NAMESPACE = 'alhanouf1'
     SERVICE_NAME = 'person-service'
-    TOKEN=credentials('1be568b2-5054-466a-a48d-14dd2d1b9945')
+    TOKEN=credentials('823af0c8-8029-46db-9041-ad80c144bcb6')
   }
   stages {
       stage("Build") {
+          when { changeset "**/person-service/**" }
           steps {
               container('dnd') {
                   sh '''
@@ -49,6 +50,7 @@ spec:
           }
       }
       stage("Release") {
+          when { changeset "**/person-service/**" }
           steps {
               container('dnd') {
                   sh '''
@@ -59,6 +61,7 @@ spec:
           }
       }
       stage("Deploy") {
+          when { changeset "**/person-service/**" }
           steps {
               container('kubectl') {
                   sh '''
