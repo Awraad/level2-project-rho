@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: department-service
-        image: alhanouf1/department-service
+        image: awraad/department-service
         ports:
         - containerPort: 80
