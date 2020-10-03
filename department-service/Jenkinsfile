@@ -32,10 +32,10 @@ spec:
     }
   } 
   environment {
-    CREDS = credentials('rho-team-docker') 
-    DOCKER_NAMESPACE = 'alhanouf1'
+    CREDS = credentials('awraad-docker') 
+    DOCKER_NAMESPACE = 'awraad'
     SERVICE_NAME = 'department-service'
-    TOKEN=credentials('823af0c8-8029-46db-9041-ad80c144bcb6')
+    TOKEN=credentials('92b3c391-4207-4a12-b80d-102e70694eb5')
   }
   stages {
       stage("Build") {
