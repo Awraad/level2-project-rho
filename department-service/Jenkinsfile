@@ -39,7 +39,7 @@ spec:
   }
   stages {
       stage("Build") {
-          when { changeset "**/department-service/**" }
+         /**   when { changeset "**/department-service/**" } **/
           steps {
               container('dnd') {
                   sh '''
@@ -50,7 +50,7 @@ spec:
           }
       }
       stage("Release") {
-          when { changeset "**/department-service/**" }
+         /**   when { changeset "**/department-service/**" } **/
           steps {
               container('dnd') {
                   sh '''
@@ -61,7 +61,7 @@ spec:
           }
       }
       stage("Deploy") {
-          when { changeset "**/department-service/**" }
+       /**   when { changeset "**/department-service/**" } **/
           steps {
               container('kubectl') {
                   sh '''
