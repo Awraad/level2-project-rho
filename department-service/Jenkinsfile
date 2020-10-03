@@ -35,7 +35,7 @@ spec:
     CREDS = credentials('awraad-docker') 
     DOCKER_NAMESPACE = 'awraad'
     SERVICE_NAME = 'department-service'
-    TOKEN=credentials('92b3c391-4207-4a12-b80d-102e70694eb5')
+    TOKEN=credentials('93fb6257-542e-4d6d-9686-5b8ec915a974')
   }
   stages {
       stage("Build") {
